@@ -76,10 +76,10 @@ export default function UploadPage() {
       router.push(`/upload/result?url=${data.url}&hash=${data.hash}&size=${data.size}&name=${data.name}`);
 
     } catch (error: any) {
-      setUploadError(error.message || "上传过程中发生错误。");
+      setUploadError("上传失败");
       toast({
         title: "上传失败",
-        description: error.message || "上传过程中发生错误。",
+        description: "上传过程中发生错误。",
         variant: "destructive",
       });
     } finally {
@@ -163,3 +163,4 @@ export default function UploadPage() {
     </div>
   );
 }
+
