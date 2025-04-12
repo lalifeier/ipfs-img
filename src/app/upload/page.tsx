@@ -69,14 +69,14 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-4 bg-gray-100">
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <Card className="w-full max-w-md rounded-xl shadow-md overflow-hidden">
-          <CardHeader className="p-6 pb-4">
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
+      <main className="flex flex-col items-center justify-center w-full flex-1 max-w-2xl">
+        <Card className="w-full rounded-xl shadow-md overflow-hidden">
+          <CardHeader className="p-8 pb-4">
             <CardTitle className="text-3xl font-semibold text-gray-800">File Upload</CardTitle>
             <CardDescription className="text-gray-500">Drag and drop your file here</CardDescription>
           </CardHeader>
-          <CardContent className="p-6 pt-0">
+          <CardContent className="p-8 pt-0">
             <div
               className="relative border-2 border-dashed rounded-md p-12 w-full cursor-pointer transition-colors duration-300 hover:border-indigo-500"
               onDrop={onDrop}
@@ -105,7 +105,7 @@ export default function UploadPage() {
               )}
             </div>
 
-            <div className="mt-4">
+            <div className="mt-6">
               <Input
                 type="password"
                 placeholder="Password (optional)"
@@ -116,7 +116,7 @@ export default function UploadPage() {
             </div>
 
             <Button
-              className="mt-6 w-full rounded-md py-3 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300"
+              className="mt-8 w-full rounded-md py-4 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300"
               onClick={handleUpload}
               disabled={!selectedFile}
             >

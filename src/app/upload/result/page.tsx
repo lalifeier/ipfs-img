@@ -40,23 +40,23 @@ export default function UploadResultPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-4 bg-gray-100">
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <Card className="w-full max-w-md rounded-xl shadow-md overflow-hidden">
-          <CardHeader className="p-6 pb-4">
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
+      <main className="flex flex-col items-center justify-center w-full flex-1 max-w-2xl">
+        <Card className="w-full rounded-xl shadow-md overflow-hidden">
+          <CardHeader className="p-8 pb-4">
             <CardTitle className="text-3xl font-semibold text-gray-800">Upload Result</CardTitle>
             <CardDescription className="text-gray-500">File uploaded successfully!</CardDescription>
           </CardHeader>
-          <CardContent className="p-6">
+          <CardContent className="p-8">
             {url && hash && size && name ? (
               <div>
-                <div className="mb-4">
-                  <p className="font-semibold text-gray-700">File information</p>
+                <div className="mb-6">
+                  <p className="font-semibold text-gray-700 mb-2">File information</p>
                   <p className="text-gray-600">Name: {name}</p>
                   <p className="text-gray-600">Size: {size} bytes</p>
                   <p className="text-gray-600">IPFS Hash: {hash}</p>
                 </div>
-                <div className="mb-4 flex items-center">
+                <div className="mb-6 flex items-center">
                   <p className="font-semibold text-gray-700 mr-2">Download Link:</p>
                   <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
                     {url}
@@ -72,7 +72,7 @@ export default function UploadResultPage() {
                   </Button>
                 </div>
                 <Link href="/upload" className="w-full">
-                  <Button className="w-full rounded-md py-3 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300">Upload New File</Button>
+                  <Button className="w-full rounded-md py-4 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300">Upload New File</Button>
                 </Link>
               </div>
             ) : (
