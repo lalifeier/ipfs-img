@@ -51,28 +51,32 @@ export default function UploadResultPage() {
             {url && hash && size && name ? (
               <div className="flex flex-col gap-4">
                 <div className="mb-6">
+                  <p className="font-semibold text-gray-700 mb-2">下载链接:</p>
+                  <div className="flex items-center">
+                    <div className="overflow-x-auto whitespace-nowrap mr-2">
+                      <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
+                        {url}
+                      </a>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={handleCopyClick}
+                      disabled={isCopied}
+                      className="ml-2 rounded-full hover:bg-gray-200"
+                    >
+                      {isCopied ? <Copy className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="mb-6">
                   <p className="font-semibold text-gray-700 mb-2">文件信息</p>
                   <p className="text-gray-600">文件名: {name}</p>
                   <p className="text-gray-600">文件大小: {size} 字节</p>
                   <p className="text-gray-600">IPFS 哈希值: {hash}</p>
                 </div>
-                <div className="mb-6 flex items-center">
-                  <p className="font-semibold text-gray-700 mr-2">下载链接:</p>
-                  <div className="overflow-x-auto whitespace-nowrap">
-                    <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
-                      {url}
-                    </a>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={handleCopyClick}
-                    disabled={isCopied}
-                    className="ml-2 rounded-full hover:bg-gray-200"
-                  >
-                    {isCopied ? <Copy className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  </Button>
-                </div>
+
                 <Link href="/upload" className="w-full">
                   <Button className="w-full rounded-md py-4 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300">上传新文件</Button>
                 </Link>
