@@ -1,10 +1,8 @@
 'use client';
 
 import { useState, useCallback } from "react";
-import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { File } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
@@ -12,12 +10,24 @@ import { Progress } from "@/components/ui/progress";
 export default function UploadPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [password, setPassword] = useState("");
-  const { toast } = useToast();
-  const router = useRouter();
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [uploadResult, setUploadResult] = useState<{
+    url: string;
+    hash: string;
+    size: number;
+    name: string;
+  } | null>(null);
+  const [showResult, setShowResult] = useState(false);
 
+  const resetForm = () => {
+    setSelectedFile(null);
+    setPassword("");
+    setUploadResult(null);
+    setShowResult(false);
+    setUploadProgress(0);
+  };
   const onDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
@@ -33,13 +43,6 @@ export default function UploadPage() {
 
   const handleUpload = async () => {
     if (!selectedFile) {
-      toast({
-        title: "未选择文件",
-        description: "请选择您要上传的文件。",
-      });
-      return;
-    }
-
     setIsUploading(true);
     setUploadProgress(0);
     setUploadError(null);
@@ -64,24 +67,14 @@ export default function UploadPage() {
 
       if (!response.ok) {
         setUploadError(`上传失败: HTTP状态码 ${response.status}`);
-        toast({
-            title: "上传失败",
-            description: `HTTP error! status: ${response.status}`,
-            variant: "destructive",
-        });
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-      router.push(`/upload/result?url=${data.url}&hash=${data.hash}&size=${data.size}&name=${data.name}`);
-
+      setUploadResult(data);
+      setShowResult(true);
     } catch (error: any) {
       setUploadError("上传失败");
-      toast({
-        title: "上传失败",
-        description: "上传过程中发生错误。",
-        variant: "destructive",
-      });
     } finally {
       setIsUploading(false);
       setUploadProgress(0);
@@ -92,9 +85,9 @@ export default function UploadPage() {
     e.preventDefault();
   };
 
-  return (
-    <div className="grid h-screen place-items-center bg-gray-100 p-4">
-      <main className="flex flex-col items-center justify-center w-full flex-1 max-w-4xl">
+  const uploadForm = () => (
+      <>
+      
         <Card className="w-full rounded-xl shadow-md overflow-hidden animate-fade-in">
           <CardHeader className="p-6 pb-4">
             <CardTitle className="text-2xl font-semibold text-gray-800">文件上传</CardTitle>
@@ -158,9 +151,45 @@ export default function UploadPage() {
               {isUploading ? `上传中...` : "上传"}
             </Button>
           </CardContent>
+        </Card>  
+      </>
+  );
+
+  const resultCard = () => {
+    if (!uploadResult) return null;
+
+    const { url, hash, size, name } = uploadResult;
+    const handleCopyClick = () => {
+      navigator.clipboard.writeText(url);
+    };
+
+    return (
+        <Card className="w-full rounded-xl shadow-md overflow-hidden animate-fade-in">
+            <CardHeader className="p-6 pb-4">
+                <CardTitle className="text-2xl font-semibold text-gray-800">上传结果</CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 pt-0">
+                <p>文件名: {name}</p>
+                <p>文件大小: {size} bytes</p>
+                <p>URL: {url}</p>
+                <p>Hash: {hash}</p>
+                <Button className="mt-4 mr-2" onClick={handleCopyClick}>
+                    复制 URL
+                </Button>
+                <Button className="mt-4" onClick={resetForm}>
+                    上传新文件
+                </Button>
+            </CardContent>
         </Card>
+    );
+  }
+  return (
+    <div className="grid h-screen place-items-center bg-gray-100 p-4">
+      <main className="flex flex-col items-center justify-center w-full flex-1 max-w-4xl">
+        {!showResult && uploadForm()}
+        {showResult && resultCard()}
       </main>
     </div>
   );
 }
-
+}
