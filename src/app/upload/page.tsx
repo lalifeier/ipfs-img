@@ -30,8 +30,8 @@ export default function UploadPage() {
   const handleUpload = async () => {
     if (!selectedFile) {
       toast({
-        title: "No file selected",
-        description: "Please select a file to upload.",
+        title: "未选择文件",
+        description: "请选择您要上传的文件。",
       });
       return;
     }
@@ -57,8 +57,8 @@ export default function UploadPage() {
 
     } catch (error: any) {
       toast({
-        title: "Upload failed",
-        description: error.message || "An error occurred during upload.",
+        title: "上传失败",
+        description: error.message || "上传过程中发生错误。",
         variant: "destructive",
       });
     }
@@ -73,8 +73,8 @@ export default function UploadPage() {
       <main className="flex flex-col items-center justify-center w-full flex-1 max-w-2xl">
         <Card className="w-full rounded-xl shadow-md overflow-hidden">
           <CardHeader className="p-8 pb-4">
-            <CardTitle className="text-3xl font-semibold text-gray-800">File Upload</CardTitle>
-            <CardDescription className="text-gray-500">Drag and drop your file here</CardDescription>
+            <CardTitle className="text-3xl font-semibold text-gray-800">文件上传</CardTitle>
+            <CardDescription className="text-gray-500">拖拽文件到此处</CardDescription>
           </CardHeader>
           <CardContent className="p-8 pt-0">
             <div
@@ -87,11 +87,11 @@ export default function UploadPage() {
               {selectedFile ? (
                 <div className="flex items-center justify-center">
                   <File className="w-6 h-6 text-gray-500 mr-2" />
-                  <p className="text-gray-700">Selected file: {selectedFile.name}</p>
+                  <p className="text-gray-700">已选择文件: {selectedFile.name}</p>
                 </div>
               ) : (
                 <>
-                  <p className="text-gray-600 mb-2">Drag and drop a file here, or click to select one</p>
+                  <p className="text-gray-600 mb-2">拖拽文件到这里，或者点击选择文件</p>
                   <input
                     type="file"
                     className="hidden"
@@ -99,7 +99,7 @@ export default function UploadPage() {
                     onChange={onFileSelect}
                   />
                   <label htmlFor="file-upload" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 cursor-pointer font-semibold">
-                    Select file
+                    选择文件
                   </label>
                 </>
               )}
@@ -108,7 +108,7 @@ export default function UploadPage() {
             <div className="mt-6">
               <Input
                 type="password"
-                placeholder="Password (optional)"
+                placeholder="密码 (可选)"
                 value={password}
                 className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-700"
                 onChange={(e) => setPassword(e.target.value)}
@@ -120,7 +120,7 @@ export default function UploadPage() {
               onClick={handleUpload}
               disabled={!selectedFile}
             >
-              Upload
+              上传
             </Button>
           </CardContent>
         </Card>
@@ -128,3 +128,4 @@ export default function UploadPage() {
     </div>
   );
 }
+

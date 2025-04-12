@@ -23,16 +23,16 @@ export default function UploadResultPage() {
         .then(() => {
           setIsCopied(true);
           toast({
-            title: "Copied!",
-            description: "URL copied to clipboard.",
+            title: "已复制!",
+            description: "URL 已复制到剪贴板。",
           });
           setTimeout(() => setIsCopied(false), 3000);
         })
         .catch(err => {
-          console.error("Failed to copy text: ", err);
+          console.error("复制失败: ", err);
           toast({
-            title: "Error",
-            description: "Failed to copy URL.",
+            title: "错误",
+            description: "复制 URL 失败。",
             variant: "destructive",
           });
         });
@@ -44,20 +44,20 @@ export default function UploadResultPage() {
       <main className="flex flex-col items-center justify-center w-full flex-1 max-w-2xl">
         <Card className="w-full rounded-xl shadow-md overflow-hidden">
           <CardHeader className="p-8 pb-4">
-            <CardTitle className="text-3xl font-semibold text-gray-800">Upload Result</CardTitle>
-            <CardDescription className="text-gray-500">File uploaded successfully!</CardDescription>
+            <CardTitle className="text-3xl font-semibold text-gray-800">上传结果</CardTitle>
+            <CardDescription className="text-gray-500">文件上传成功!</CardDescription>
           </CardHeader>
           <CardContent className="p-8">
             {url && hash && size && name ? (
               <div>
                 <div className="mb-6">
-                  <p className="font-semibold text-gray-700 mb-2">File information</p>
-                  <p className="text-gray-600">Name: {name}</p>
-                  <p className="text-gray-600">Size: {size} bytes</p>
-                  <p className="text-gray-600">IPFS Hash: {hash}</p>
+                  <p className="font-semibold text-gray-700 mb-2">文件信息</p>
+                  <p className="text-gray-600">文件名: {name}</p>
+                  <p className="text-gray-600">文件大小: {size} 字节</p>
+                  <p className="text-gray-600">IPFS 哈希值: {hash}</p>
                 </div>
                 <div className="mb-6 flex items-center">
-                  <p className="font-semibold text-gray-700 mr-2">Download Link:</p>
+                  <p className="font-semibold text-gray-700 mr-2">下载链接:</p>
                   <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
                     {url}
                   </a>
@@ -72,11 +72,11 @@ export default function UploadResultPage() {
                   </Button>
                 </div>
                 <Link href="/upload" className="w-full">
-                  <Button className="w-full rounded-md py-4 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300">Upload New File</Button>
+                  <Button className="w-full rounded-md py-4 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300">上传新文件</Button>
                 </Link>
               </div>
             ) : (
-              <p className="text-gray-600">Missing upload parameters.</p>
+              <p className="text-gray-600">缺少上传参数。</p>
             )}
           </CardContent>
         </Card>
@@ -84,3 +84,4 @@ export default function UploadResultPage() {
     </div>
   );
 }
+
