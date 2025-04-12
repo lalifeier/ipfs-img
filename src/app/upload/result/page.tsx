@@ -90,7 +90,7 @@ export default function UploadResultPage() {
                             rel="noopener noreferrer"
                             className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all"
                           >
-                            下载链接
+                            {url}
                           </a>
                            <Button
                             variant="ghost"
@@ -120,3 +120,4 @@ export default function UploadResultPage() {
     </div>
   );
 }
+
