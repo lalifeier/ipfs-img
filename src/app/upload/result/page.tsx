@@ -57,7 +57,9 @@ export default function UploadResultPage() {
         <Card className="w-full rounded-xl shadow-md overflow-hidden animate-fade-in">
           <CardHeader className="p-8 pb-4">
             <CardTitle className="text-3xl font-semibold text-gray-800">上传结果</CardTitle>
-            <CardDescription className="text-gray-500">文件上传成功!</CardDescription>
+            <CardDescription className="text-gray-500">
+              <span className="text-green-500">文件上传成功!</span>
+            </CardDescription>
           </CardHeader>
           <CardContent className="p-8">
             {url && hash && size && name ? (
@@ -79,12 +81,15 @@ export default function UploadResultPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="flex flex-col gap-2">
-                      <div className="flex items-center">
-                        <div className="overflow-x-auto whitespace-nowrap">
-                          <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
-                            {url}
-                          </a>
-                        </div>
+                      <div className="flex items-center justify-between">
+                        <a
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all"
+                        >
+                          下载链接
+                        </a>
                         <Button
                           variant="ghost"
                           size="icon"
@@ -94,6 +99,16 @@ export default function UploadResultPage() {
                         >
                           {isCopied ? <Copy className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                         </Button>
+                      </div>
+                      <div className="overflow-x-auto whitespace-nowrap">
+                        <a
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-600 underline break-all"
+                        >
+                          {url}
+                        </a>
                       </div>
                     </div>
                   </CardContent>
