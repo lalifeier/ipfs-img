@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -46,48 +47,56 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-2">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <div
-          className="border-2 border-dashed rounded-md p-20 w-96 bg-white cursor-pointer"
-          onDrop={onDrop}
-          onDragOver={preventDefault}
-          onDragEnter={preventDefault}
-          onDragLeave={preventDefault}
-        >
-          {selectedFile ? (
-            <p>Selected file: {selectedFile.name}</p>
-          ) : (
-            <>
-              <p>Drag and drop a file here, or click to select one</p>
-              <input
-                type="file"
-                className="hidden"
-                id="file-upload"
-                onChange={onFileSelect}
+        <Card className="w-96">
+          <CardHeader>
+            <CardTitle>FileDrop</CardTitle>
+            <CardDescription>Upload your files securely</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div
+              className="border-2 border-dashed rounded-md p-10 w-full cursor-pointer"
+              onDrop={onDrop}
+              onDragOver={preventDefault}
+              onDragEnter={preventDefault}
+              onDragLeave={preventDefault}
+            >
+              {selectedFile ? (
+                <p>Selected file: {selectedFile.name}</p>
+              ) : (
+                <>
+                  <p>Drag and drop a file here, or click to select one</p>
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="file-upload"
+                    onChange={onFileSelect}
+                  />
+                  <label htmlFor="file-upload" className="text-primary">
+                    Select file
+                  </label>
+                </>
+              )}
+            </div>
+
+            <div className="mt-4">
+              <Input
+                type="password"
+                placeholder="Password (optional)"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <label htmlFor="file-upload" className="text-blue-500">
-                Select file
-              </label>
-            </>
-          )}
-        </div>
+            </div>
 
-        <div className="mt-4">
-          <Input
-            type="password"
-            placeholder="Password (optional)"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-
-        <Button
-          className="bg-indigo-500 text-white font-bold py-2 px-4 rounded mt-4"
-          onClick={handleUpload}
-        >
-          Upload
-        </Button>
+            <Button
+              className="mt-4"
+              onClick={handleUpload}
+            >
+              Upload
+            </Button>
+          </CardContent>
+        </Card>
       </main>
     </div>
   );
