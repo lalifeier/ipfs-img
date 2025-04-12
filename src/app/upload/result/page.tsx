@@ -71,7 +71,7 @@ export default function UploadResultPage() {
 
                 <div className="mb-6">
                     <p className="font-semibold text-gray-700 mb-2">下载链接:</p>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center">
                         <div className="overflow-x-auto whitespace-nowrap mr-2">
                             <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
                                 {url}
@@ -102,3 +102,4 @@ export default function UploadResultPage() {
     </div>
   );
 }
+
