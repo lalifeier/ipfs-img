@@ -82,34 +82,27 @@ export default function UploadResultPage() {
                   <CardContent>
                     <div className="flex flex-col gap-2">
                       <div className="flex items-center justify-between">
-                        <a
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all"
-                        >
-                          下载链接
-                        </a>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={handleCopyClick}
-                          disabled={isCopied}
-                          className="rounded-full hover:bg-gray-200 ml-2"
-                        >
-                          {isCopied ? <Copy className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                        </Button>
+                        
+                         
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all"
+                          >
+                            下载链接
+                          </a>
+                           <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={handleCopyClick}
+                            disabled={isCopied}
+                            className="rounded-full hover:bg-gray-200 ml-2"
+                          >
+                            {isCopied ? <Copy className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                          </Button>
                       </div>
-                      <div className="overflow-x-auto whitespace-nowrap">
-                        <a
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-gray-600 underline break-all"
-                        >
-                          {url}
-                        </a>
-                      </div>
+                      
                     </div>
                   </CardContent>
                 </Card>
