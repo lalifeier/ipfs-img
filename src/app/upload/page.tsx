@@ -15,6 +15,7 @@ export default function UploadPage() {
   const { toast } = useToast();
   const router = useRouter();
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
 
   const onDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -38,6 +39,9 @@ export default function UploadPage() {
       return;
     }
 
+    setIsUploading(true);
+    setUploadProgress(0);
+
     const formData = new FormData();
     formData.append("file", selectedFile);
     if (password) {
@@ -48,7 +52,6 @@ export default function UploadPage() {
       const response = await fetch("https://ipfs.lalifeier.eu.org/upload", {
         method: "POST",
         body: formData,
-        // Track upload progress
         onUploadProgress: (progressEvent) => {
           const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           setUploadProgress(progress);
@@ -69,6 +72,7 @@ export default function UploadPage() {
         variant: "destructive",
       });
     } finally {
+      setIsUploading(false);
       setUploadProgress(0);
     }
   };
@@ -124,7 +128,7 @@ export default function UploadPage() {
               />
             </div>
 
-            {uploadProgress > 0 && (
+            {isUploading && (
               <div className="mt-4">
                 <Progress value={uploadProgress} />
                 <p className="text-sm text-gray-500 mt-1 text-right">{uploadProgress}%</p>
@@ -134,9 +138,9 @@ export default function UploadPage() {
             <Button
               className="mt-6 w-full rounded-md py-3 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300"
               onClick={handleUpload}
-              disabled={!selectedFile}
+              disabled={!selectedFile || isUploading}
             >
-              上传
+              {isUploading ? "上传中..." : "上传"}
             </Button>
           </CardContent>
         </Card>
