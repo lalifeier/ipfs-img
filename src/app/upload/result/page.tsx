@@ -58,9 +58,11 @@ export default function UploadResultPage() {
                 </div>
                 <div className="mb-6 flex items-center">
                   <p className="font-semibold text-gray-700 mr-2">下载链接:</p>
-                  <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
-                    {url}
-                  </a>
+                  <div className="overflow-x-auto whitespace-nowrap">
+                    <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
+                      {url}
+                    </a>
+                  </div>
                   <Button
                     variant="ghost"
                     size="icon"
