@@ -49,7 +49,7 @@ export default function UploadResultPage() {
           </CardHeader>
           <CardContent className="p-8">
             {url && hash && size && name ? (
-              <div>
+              <div className="flex flex-col gap-4">
                 <div className="mb-6">
                   <p className="font-semibold text-gray-700 mb-2">文件信息</p>
                   <p className="text-gray-600">文件名: {name}</p>
@@ -84,4 +84,3 @@ export default function UploadResultPage() {
     </div>
   );
 }
-
