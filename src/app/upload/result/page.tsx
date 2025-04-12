@@ -53,7 +53,7 @@ export default function UploadResultPage() {
 
   return (
     <div className="grid h-screen place-items-center bg-gray-100 p-6">
-      <main className="flex flex-col items-center justify-center w-full flex-1 max-w-3xl">
+      <main className="flex flex-col items-center justify-center w-full flex-1 max-w-xl">
         <Card className="w-full rounded-xl shadow-md overflow-hidden animate-fade-in">
           <CardHeader className="p-8 pb-4">
             <CardTitle className="text-3xl font-semibold text-gray-800">上传结果</CardTitle>
@@ -117,3 +117,4 @@ export default function UploadResultPage() {
     </div>
   );
 }
+
