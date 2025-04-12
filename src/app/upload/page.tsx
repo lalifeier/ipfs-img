@@ -69,9 +69,9 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
+    <div className="grid h-screen place-items-center bg-gray-100 p-6">
       <main className="flex flex-col items-center justify-center w-full flex-1 max-w-6xl">
-        <Card className="w-full rounded-xl shadow-md overflow-hidden">
+        <Card className="w-full rounded-xl shadow-md overflow-hidden animate-fade-in">
           <CardHeader className="p-8 pb-4">
             <CardTitle className="text-3xl font-semibold text-gray-800">文件上传</CardTitle>
             <CardDescription className="text-gray-500">拖拽文件到此处</CardDescription>
@@ -128,4 +128,3 @@ export default function UploadPage() {
     </div>
   );
 }
-

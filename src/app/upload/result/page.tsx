@@ -52,9 +52,9 @@ export default function UploadResultPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-100">
+    <div className="grid h-screen place-items-center bg-gray-100 p-6">
       <main className="flex flex-col items-center justify-center w-full flex-1 max-w-3xl">
-        <Card className="w-full rounded-xl shadow-md overflow-hidden">
+        <Card className="w-full rounded-xl shadow-md overflow-hidden animate-fade-in">
           <CardHeader className="p-8 pb-4">
             <CardTitle className="text-3xl font-semibold text-gray-800">上传结果</CardTitle>
             <CardDescription className="text-gray-500">文件上传成功!</CardDescription>
@@ -78,21 +78,23 @@ export default function UploadResultPage() {
                     <CardTitle className="font-semibold text-gray-700">下载链接</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex items-center">
-                      <div className="overflow-x-auto whitespace-nowrap mr-2">
+                    <div className="flex flex-col gap-2">
+                      <div className="overflow-x-auto whitespace-nowrap">
                         <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
                           {url}
                         </a>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={handleCopyClick}
-                        disabled={isCopied}
-                        className="rounded-full hover:bg-gray-200"
-                      >
-                        {isCopied ? <Copy className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                      </Button>
+                      <div className="flex justify-end">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={handleCopyClick}
+                          disabled={isCopied}
+                          className="rounded-full hover:bg-gray-200"
+                        >
+                          {isCopied ? <Copy className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

@@ -6,9 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-4 bg-gray-100">
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <Card className="w-full max-w-md rounded-xl shadow-md overflow-hidden">
+    <div className="grid h-screen place-items-center bg-gray-100">
+      <main className="flex flex-col items-center justify-center w-full flex-1 px-6 md:px-20 text-center">
+        <Card className="w-full max-w-md rounded-xl shadow-md overflow-hidden animate-fade-in">
           <CardHeader className="p-6 pb-4">
             <CardTitle className="text-3xl font-semibold text-gray-800">文件速递</CardTitle>
             <CardDescription className="text-gray-500">安全便捷地上传您的文件</CardDescription>
@@ -25,4 +25,3 @@ export default function Home() {
     </div>
   );
 }
-
