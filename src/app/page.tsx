@@ -1,13 +1,18 @@
 'use client';
 
+import * as React from "react";
 import { useState, useCallback } from "react";
+import { formatBytes } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { File } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
+import { Progress } from "@/components/ui/progress";;
+import { Copy } from "lucide-react";
+import Link from 'next/link'
+import { useToast } from "@/hooks/use-toast";
 
-export default function UploadPage() {
+export default function UploadPage(){
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [password, setPassword] = useState("");
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -20,6 +25,7 @@ export default function UploadPage() {
     name: string;
   } | null>(null);
   const [showResult, setShowResult] = useState(false);
+  const { toast } = useToast();
 
   const resetForm = () => {
     setSelectedFile(null);
@@ -154,38 +160,93 @@ export default function UploadPage() {
     </>
   );
 
-  const resultCard = () => {
+  const gitresultCard = () => {
     if (!uploadResult) return null;
 
     const { url, hash, size, name } = uploadResult;
-    const handleCopyClick = () => {
-      navigator.clipboard.writeText(url);
+
+      const handleCopyClick = () => {
+        if (url) {
+        navigator.clipboard.writeText(url).then(() => {
+          toast({description: "链接已复制!"});
+          })
+          .catch(err => {
+            console.error("复制失败: ", err);
+               toast({
+              title: "错误",
+              description: "复制 URL 失败。",
+              variant: "destructive",
+            });
+          });
+      }
     };
 
-    return (
+      return (
       <Card className="w-full rounded-xl shadow-md overflow-hidden animate-fade-in">
-        <CardHeader className="p-6 pb-4">
-          <CardTitle className="text-2xl font-semibold text-gray-800">上传结果</CardTitle>
-        </CardHeader>
-        <CardContent className="p-6 pt-0">
-          <p>文件名: {name}</p>
-          <p>文件大小: {size} bytes</p>
-          <p>URL: {url}</p>
-          <p>Hash: {hash}</p>
-          <Button className="mt-4 mr-2" onClick={handleCopyClick}>
-            复制 URL
-          </Button>
-          <Button className="mt-4" onClick={resetForm}>
-            上传新文件
-          </Button>
-        </CardContent>
-      </Card>
+      <CardHeader className="p-8 pb-4">
+      <CardTitle className="text-3xl font-semibold text-gray-800">上传结果</CardTitle>
+      <CardDescription className="text-gray-500">
+      
+        <span className="text-green-500">文件上传成功!</span>
+      </CardDescription>
+    </CardHeader>
+    <CardContent className="p-8">
+      {url && hash && size && name ? (
+        <div className="flex flex-col gap-4">
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="font-semibold text-gray-700">文件信息</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">文件名: {name}</p>
+              <p className="text-gray-600">文件大小: {formatBytes(parseInt(size))}</p>
+              <p className="text-gray-600">IPFS 哈希值: {hash}</p>
+            </CardContent>
+          </Card>
+
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="font-semibold text-gray-700">下载链接</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all"
+                  >
+                    {url}
+                  </a>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={handleCopyClick}                  
+                     className="rounded-full hover:bg-gray-200 ml-2"
+                  >
+                    <Copy className="h-4 w-4" />
+                   </Button>
+                 </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Link href="/upload" className="w-full">
+            <Button className="w-full rounded-md py-4 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300">上传新文件</Button>
+          </Link>
+        </div>
+      ) : (
+          <p className="text-gray-600">缺少上传参数。</p>
+      )}
+    </CardContent>
+  </Card>
     );
   }
   return (
     <div className="grid h-screen place-items-center bg-gray-100 p-4">
-      <main className="flex flex-col items-center justify-center w-full flex-1 max-w-4xl">
-      {showResult ? resultCard() : uploadForm()}
+        <main className="flex flex-col items-center justify-center w-full flex-1 max-w-4xl">
+          {showResult ? resultCard({ toast }) : uploadForm()}
       </main>
     </div>
   );
