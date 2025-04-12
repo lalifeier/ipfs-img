@@ -185,8 +185,7 @@ export default function UploadPage() {
   return (
     <div className="grid h-screen place-items-center bg-gray-100 p-4">
       <main className="flex flex-col items-center justify-center w-full flex-1 max-w-4xl">
-        {!showResult && uploadForm()}
-        {showResult && resultCard()}
+      {showResult ? resultCard() : uploadForm()}
       </main>
     </div>
   );
