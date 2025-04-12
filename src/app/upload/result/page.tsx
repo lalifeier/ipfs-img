@@ -51,6 +51,13 @@ export default function UploadResultPage() {
             {url && hash && size && name ? (
               <div className="flex flex-col gap-4">
                 <div className="mb-6">
+                  <p className="font-semibold text-gray-700 mb-2">文件信息</p>
+                  <p className="text-gray-600">文件名: {name}</p>
+                  <p className="text-gray-600">文件大小: {size} 字节</p>
+                  <p className="text-gray-600">IPFS 哈希值: {hash}</p>
+                </div>
+
+                <div className="mb-6">
                   <p className="font-semibold text-gray-700 mb-2">下载链接:</p>
                   <div className="flex items-center">
                     <div className="overflow-x-auto whitespace-nowrap mr-2">
@@ -68,13 +75,6 @@ export default function UploadResultPage() {
                       {isCopied ? <Copy className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                     </Button>
                   </div>
-                </div>
-
-                <div className="mb-6">
-                  <p className="font-semibold text-gray-700 mb-2">文件信息</p>
-                  <p className="text-gray-600">文件名: {name}</p>
-                  <p className="text-gray-600">文件大小: {size} 字节</p>
-                  <p className="text-gray-600">IPFS 哈希值: {hash}</p>
                 </div>
 
                 <Link href="/upload" className="w-full">
