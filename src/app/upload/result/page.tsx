@@ -68,24 +68,24 @@ export default function UploadResultPage() {
                   <p className="text-gray-600">文件大小: {formatBytes(parseInt(size))}</p>
                   <p className="text-gray-600">IPFS 哈希值: {hash}</p>
                 </div>
-                 <div className="mb-6">
-                  <p className="font-semibold text-gray-700 mb-2">下载链接:</p>
-                  <div className="flex items-center">
-                    
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={handleCopyClick}
-                      disabled={isCopied}
-                      className="ml-2 rounded-full hover:bg-gray-200"
-                    >
-                      {isCopied ? <Copy className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                    </Button>
-                  </div>
-                   <div className="overflow-x-auto whitespace-nowrap mr-2">
-                      <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
-                        {url}
-                      </a>
+
+                <div className="mb-6">
+                    <p className="font-semibold text-gray-700 mb-2">下载链接:</p>
+                    <div className="flex items-center justify-between">
+                        <div className="overflow-x-auto whitespace-nowrap mr-2">
+                            <a href={url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 underline break-all">
+                                {url}
+                            </a>
+                        </div>
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={handleCopyClick}
+                            disabled={isCopied}
+                            className="rounded-full hover:bg-gray-200"
+                        >
+                            {isCopied ? <Copy className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                        </Button>
                     </div>
                 </div>
 
