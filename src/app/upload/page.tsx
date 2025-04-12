@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { File } from "lucide-react";
 
 export default function UploadPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -68,33 +69,36 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center min-h-screen py-4 bg-gray-100">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <Card className="w-96">
-          <CardHeader>
-            <CardTitle>File Upload</CardTitle>
-            <CardDescription>Upload your files securely</CardDescription>
+        <Card className="w-full max-w-md rounded-xl shadow-md overflow-hidden">
+          <CardHeader className="p-6 pb-4">
+            <CardTitle className="text-3xl font-semibold text-gray-800">File Upload</CardTitle>
+            <CardDescription className="text-gray-500">Drag and drop your file here</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6 pt-0">
             <div
-              className="border-2 border-dashed rounded-md p-10 w-full cursor-pointer"
+              className="relative border-2 border-dashed rounded-md p-12 w-full cursor-pointer transition-colors duration-300 hover:border-indigo-500"
               onDrop={onDrop}
               onDragOver={preventDefault}
               onDragEnter={preventDefault}
               onDragLeave={preventDefault}
             >
               {selectedFile ? (
-                <p>Selected file: {selectedFile.name}</p>
+                <div className="flex items-center justify-center">
+                  <File className="w-6 h-6 text-gray-500 mr-2" />
+                  <p className="text-gray-700">Selected file: {selectedFile.name}</p>
+                </div>
               ) : (
                 <>
-                  <p>Drag and drop a file here, or click to select one</p>
+                  <p className="text-gray-600 mb-2">Drag and drop a file here, or click to select one</p>
                   <input
                     type="file"
                     className="hidden"
                     id="file-upload"
                     onChange={onFileSelect}
                   />
-                  <label htmlFor="file-upload" className="text-primary cursor-pointer">
+                  <label htmlFor="file-upload" className="text-indigo-600 hover:text-indigo-700 transition-colors duration-300 cursor-pointer font-semibold">
                     Select file
                   </label>
                 </>
@@ -106,12 +110,13 @@ export default function UploadPage() {
                 type="password"
                 placeholder="Password (optional)"
                 value={password}
+                className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-gray-700"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
             <Button
-              className="mt-4"
+              className="mt-6 w-full rounded-md py-3 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300"
               onClick={handleUpload}
               disabled={!selectedFile}
             >
