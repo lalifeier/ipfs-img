@@ -48,9 +48,6 @@ export default function UploadPage() {
       const response = await fetch("https://ipfs.lalifeier.eu.org/upload", {
         method: "POST",
         body: formData,
-        headers: {
-          // No Content-Type header is needed, browser sets it automatically for FormData
-        },
         // Track upload progress
         onUploadProgress: (progressEvent) => {
           const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
