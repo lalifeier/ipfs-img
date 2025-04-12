@@ -52,7 +52,12 @@ export default function UploadPage() {
       const response = await fetch("https://ipfs.lalifeier.eu.org/upload", {
         method: "POST",
         body: formData,
-        onUploadProgress: (progressEvent) => {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        signal: AbortSignal.timeout(60000),
+        // reporting upload progress
+        onUploadProgress: (progressEvent: ProgressEvent) => {
           const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           setUploadProgress(progress);
         },
