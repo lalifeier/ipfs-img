@@ -1,5 +1,7 @@
 'use client';
 
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import * as React from "react";
 import { useState, useCallback } from "react";
 import { formatBytes } from "@/lib/utils";
@@ -246,10 +248,14 @@ export default function UploadPage(){
     );
   }
   return (
-    <div className="grid place-items-center bg-gray-100 p-4">
-        <main className="flex flex-col items-center justify-center w-full flex-1 max-w-4xl">
+    <div className="bg-gray-100">
+      <Header/>
+        <main className="container mx-auto max-w-4xl py-16 pb-24">
+        <div className="grid place-items-center p-4">
           {showResult ? resultCard({ toast }) : uploadForm()}
+        </div>
       </main>
+      <Footer/>
     </div>
   );
 }
