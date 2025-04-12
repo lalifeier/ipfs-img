@@ -69,16 +69,16 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="grid h-screen place-items-center bg-gray-100 p-6">
-      <main className="flex flex-col items-center justify-center w-full flex-1 max-w-6xl">
+    <div className="grid h-screen place-items-center bg-gray-100 p-4">
+      <main className="flex flex-col items-center justify-center w-full flex-1 max-w-4xl">
         <Card className="w-full rounded-xl shadow-md overflow-hidden animate-fade-in">
-          <CardHeader className="p-8 pb-4">
-            <CardTitle className="text-3xl font-semibold text-gray-800">文件上传</CardTitle>
+          <CardHeader className="p-6 pb-4">
+            <CardTitle className="text-2xl font-semibold text-gray-800">文件上传</CardTitle>
             <CardDescription className="text-gray-500">拖拽文件到此处</CardDescription>
           </CardHeader>
-          <CardContent className="p-8 pt-0">
+          <CardContent className="p-6 pt-0">
             <div
-              className="relative border-2 border-dashed rounded-md p-12 w-full cursor-pointer transition-colors duration-300 hover:border-indigo-500"
+              className="relative border-2 border-dashed rounded-md p-8 w-full cursor-pointer transition-colors duration-300 hover:border-indigo-500"
               onDrop={onDrop}
               onDragOver={preventDefault}
               onDragEnter={preventDefault}
@@ -105,7 +105,7 @@ export default function UploadPage() {
               )}
             </div>
 
-            <div className="mt-6">
+            <div className="mt-4">
               <Input
                 type="password"
                 placeholder="密码 (可选)"
@@ -116,7 +116,7 @@ export default function UploadPage() {
             </div>
 
             <Button
-              className="mt-8 w-full rounded-md py-4 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300"
+              className="mt-6 w-full rounded-md py-3 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300"
               onClick={handleUpload}
               disabled={!selectedFile}
             >
@@ -128,3 +128,4 @@ export default function UploadPage() {
     </div>
   );
 }
+
