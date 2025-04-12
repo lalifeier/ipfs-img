@@ -140,7 +140,7 @@ export default function UploadPage() {
               onClick={handleUpload}
               disabled={!selectedFile || isUploading}
             >
-              {isUploading ? "上传中..." : "上传"}
+              {isUploading ? `上传中... ${uploadProgress}%` : "上传"}
             </Button>
           </CardContent>
         </Card>
