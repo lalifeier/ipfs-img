@@ -16,6 +16,7 @@ export default function UploadPage() {
   const router = useRouter();
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   const onDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -41,6 +42,7 @@ export default function UploadPage() {
 
     setIsUploading(true);
     setUploadProgress(0);
+    setUploadError(null);
 
     const formData = new FormData();
     formData.append("file", selectedFile);
@@ -61,6 +63,7 @@ export default function UploadPage() {
       });
 
       if (!response.ok) {
+        setUploadError(`上传失败: HTTP状态码 ${response.status}`);
         toast({
             title: "上传失败",
             description: `HTTP error! status: ${response.status}`,
@@ -73,6 +76,7 @@ export default function UploadPage() {
       router.push(`/upload/result?url=${data.url}&hash=${data.hash}&size=${data.size}&name=${data.name}`);
 
     } catch (error: any) {
+      setUploadError(error.message || "上传过程中发生错误。");
       toast({
         title: "上传失败",
         description: error.message || "上传过程中发生错误。",
@@ -140,6 +144,10 @@ export default function UploadPage() {
                 <Progress value={uploadProgress} />
                 <p className="text-sm text-gray-500 mt-1 text-right">{uploadProgress}%</p>
               </div>
+            )}
+
+            {uploadError && (
+                <p className="text-red-500 mt-4">{uploadError}</p>
             )}
 
             <Button
