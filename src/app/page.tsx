@@ -160,7 +160,7 @@ export default function UploadPage(){
     </>
   );
 
-  const gitresultCard = () => {
+  const resultCard = () => {
     if (!uploadResult) return null;
 
     const { url, hash, size, name } = uploadResult;
