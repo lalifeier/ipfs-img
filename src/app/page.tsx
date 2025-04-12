@@ -232,9 +232,11 @@ export default function UploadPage(){
             </CardContent>
           </Card>
 
-          <Link href="/upload" className="w-full">
-            <Button className="w-full rounded-md py-4 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300">上传新文件</Button>
-          </Link>
+          <Button
+            className="w-full rounded-md py-4 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300"
+            onClick={resetForm}>
+            上传新文件
+          </Button>
         </div>
       ) : (
           <p className="text-gray-600">缺少上传参数。</p>
