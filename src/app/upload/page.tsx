@@ -61,6 +61,11 @@ export default function UploadPage() {
       });
 
       if (!response.ok) {
+        toast({
+            title: "上传失败",
+            description: `HTTP error! status: ${response.status}`,
+            variant: "destructive",
+        });
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
