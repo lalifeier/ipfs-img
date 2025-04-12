@@ -7,12 +7,14 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { File } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 export default function UploadPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [password, setPassword] = useState("");
   const { toast } = useToast();
   const router = useRouter();
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const onDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -46,6 +48,14 @@ export default function UploadPage() {
       const response = await fetch("https://ipfs.lalifeier.eu.org/upload", {
         method: "POST",
         body: formData,
+        headers: {
+          // No Content-Type header is needed, browser sets it automatically for FormData
+        },
+        // Track upload progress
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setUploadProgress(progress);
+        },
       });
 
       if (!response.ok) {
@@ -61,6 +71,8 @@ export default function UploadPage() {
         description: error.message || "上传过程中发生错误。",
         variant: "destructive",
       });
+    } finally {
+      setUploadProgress(0);
     }
   };
 
@@ -115,6 +127,13 @@ export default function UploadPage() {
               />
             </div>
 
+            {uploadProgress > 0 && (
+              <div className="mt-4">
+                <Progress value={uploadProgress} />
+                <p className="text-sm text-gray-500 mt-1 text-right">{uploadProgress}%</p>
+              </div>
+            )}
+
             <Button
               className="mt-6 w-full rounded-md py-3 font-semibold bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300"
               onClick={handleUpload}
@@ -128,4 +147,3 @@ export default function UploadPage() {
     </div>
   );
 }
-
